@@ -1,0 +1,31 @@
+﻿@model Order
+<p>Vui lòng để lại thông tin :</p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Checkout" method="post">
+ <h3>Gửi tới </h3>
+ <div class="form-group">
+ <label>Họ và tên :</label><input asp-for="Name" class="form-control" />
+ </div>
+ <h3>Địa chỉ</h3>
+ <div class="form-group">
+ <label>Phường/ Xã/ Thị trấn:</label><input asp-for="Line1" class="form-control" />
+ </div>
+ <div class="form-group">
+ <label>Quận/ Thị xã/ Huyện:</label><input asp-for="Line2" class="form-control" />
+ </div>
+ <div class="form-group">
+ <label>Tỉnh/ Thành phố:</label><input asp-for="City" class="form-control" />
+ </div>
+ <div class="form-group">
+ <label>Số nhà :</label><input asp-for="State" class="form-control" />
+ </div>
+ <div class="form-group">
+ <label>Đường :</label><input asp-for="Zip" class="form-control" />
+ </div>
+ <div class="form-group">
+ <label>Quốc gia:</label><input asp-for="Country" class="form-control" />
+ </div>
+ <div class="text-center">
+ <input class="btn btn-primary" type="submit" value="Order" />
+ </div>
+</form>

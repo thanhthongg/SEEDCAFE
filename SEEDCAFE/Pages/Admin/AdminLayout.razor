@@ -1,0 +1,30 @@
+﻿@inherits LayoutComponentBase
+<div class="bg-info text-white p-2">
+ <span class="navbar-brand ml-2">Quyền quản lý SEEDCAFE SHOP </span>
+</div>
+<div class="container-fluid">
+ <div class="row p-2">
+ <div class="col-3">
+ <NavLink class="btn btn-outline-primary btn-block"
+ href="/admin/coffes"
+ ActiveClass="btn-primary text-white"
+ Match="NavLinkMatch.Prefix">
+ Coffes
+ </NavLink>
+ <NavLink class="btn btn-outline-primary btn-block"
+ href="/admin/orders"
+ ActiveClass="btn-primary text-white"
+ Match="NavLinkMatch.Prefix">
+ Đặt hàng 
+ </NavLink>
+ </div>
+ <div class="col">
+ @Body
+ </div>
+ </div>
+</div>
+<style>
+    body {
+    background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url(https://i.pinimg.com/564x/18/29/56/1829568986fb4a8eca5fc31fc48b7248.jpg);
+}
+</style>

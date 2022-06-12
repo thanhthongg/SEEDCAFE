@@ -1,0 +1,24 @@
+﻿@model Book
+<div class="card" style="width: 100%;">
+ <div class="card-body">
+ <h5 class="card-title">
+ @Model.TenLoaiHat
+ <span class="badge badge-pill badge-primary">
+ <small>@Model.Gia.ToString("c")</small>
+ </span>
+ </h5>
+ <form id="@Model.BookID" asp-page="/MyCart" method="post">
+ <input type="hidden" asp-for="BookID" />
+ <input type="hidden" name="returnUrl"
+ value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+ <div class="card-text p-1">
+ <strong>@Model.GioiThieu</strong>
+ <p>@Model.AnhHienThi</p>
+ <button type="submit"
+ class="btn btn-warning btn-sm pull-right">
+ Thêm vào giỏ 
+ </button>
+ </div>
+ </form>
+ </div>
+</div>

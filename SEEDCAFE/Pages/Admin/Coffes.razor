@@ -1,0 +1,68 @@
+﻿@page "/admin/Coffes"
+@page "/admin"
+@inherits OwningComponentBase<ICafeRepository>
+<table class="table table-sm table-striped table-bordered">
+ <thead>
+ <tr>
+ <th>ID</th>
+ <th>Tên loại hạt </th>
+ <th>Giới thiệu  </th>
+ <th>Giá </th>
+ <td />
+ </tr>
+ </thead>
+ <tbody>
+ @if (BookData?.Count() > 0)
+ {
+ @foreach (Book b in BookData)
+ {
+ <tr>
+ <td>@b.BookID</td>
+ <td>@b.TenLoaiHat</td>
+ <td>@b.GioiThieu</td>
+ <td>@b.Gia.ToString("c")</td>
+ <td>
+ <NavLink class="btn btn-info btn-sm"
+ href="@GetDetailsUrl(b.BookID)">
+ Thông tin 
+ </NavLink>
+ <NavLink class="btn btn-warning btn-sm"
+ href="@GetEditUrl(b.BookID)">
+ Chỉnh sửa 
+ </NavLink>
+ <button class="btn btn-danger btn-sm"
+ @onclick="@(e => DeleteBook(b))">
+ Xóa 
+ </button>
+ </td>
+ </tr>
+ }
+ }
+ else
+ {
+ <tr>
+ <td colspan="5" class="text-center">Không có cafe nào</td>
+ </tr>
+ }
+ </tbody>
+</table>
+<NavLink class="btn btn-primary" href="/admin/coffes/create">Tạo</NavLink>
+@code {
+ public ICafeRepository Repository => Service;
+ public IEnumerable<Book> BookData { get; set; }
+ protected async override Task OnInitializedAsync()
+ {
+ await UpdateData();
+ }
+ public async Task UpdateData()
+ {
+ BookData = await Repository.Books.ToListAsync();
+ }
+ public async Task DeleteBook(Book b)
+ {
+ Repository.DeleteBook(b);
+ await UpdateData();
+ }
+ public string GetDetailsUrl(long id) => $"/admin/coffes/details/{id}";
+ public string GetEditUrl(long id) => $"/admin/coffes/edit/{id}";
+}

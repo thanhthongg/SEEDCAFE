@@ -1,0 +1,72 @@
+﻿@page "/admin/coffes/edit/{id:long}"
+@page "/admin/coffes/create"
+@inherits OwningComponentBase<ICafeRepository>
+<style>
+ div.validation-message {
+ color: rgb(220, 53, 69);
+ font-weight: 500
+ }
+</style>
+<h3 class="bg-@ThemeColor text-white text-center p-1">@TitleText đơn hàng </h3>
+<EditForm Model="Book" OnValidSubmit="SaveBook">
+ <DataAnnotationsValidator />
+ @if (Book.BookID != 0)
+ {
+ <div class="form-group">
+ <label>Số thứ tự </label>
+ <input class="form-control" disabled value="@Book.BookID" />
+ </div>
+ }
+ <div class="form-group">
+ <label>Tên hạt </label>
+ <ValidationMessage For="@(() => Book.TenLoaiHat)" />
+ <InputText class="form-control" @bind-Value="Book.TenLoaiHat" />
+ </div>
+ <div class="form-group">
+ <label>Giới thiệu </label>
+ <ValidationMessage For="@(() => Book.GioiThieu)" />
+ <InputText class="form-control" @bind-Value="Book.GioiThieu" />
+ </div>
+ <div class="form-group">
+ <label>Ảnh hiển thị </label>
+ <ValidationMessage For="@(() => Book.AnhHienThi)" />
+ <InputText class="form-control" @bind-Value="Book.AnhHienThi" />
+ </div>
+ <div class="form-group">
+ <label>Giá </label>
+ <ValidationMessage For="@(() => Book.Gia)" />
+ <InputNumber class="form-control" @bind-Value="Book.Gia" />
+ </div>
+ <button type="submit" class="btn btn-@ThemeColor">Lưu </button>
+ <NavLink class="btn btn-secondary" 
+href="/admin/products">Hủy </NavLink>
+</EditForm>
+@code {
+ public ICafeRepository Repository => Service;
+ [Inject]
+ public NavigationManager NavManager { get; set; }
+ [Parameter]
+ public long Id { get; set; } = 0;
+ public Book Book { get; set; } = new Book();
+ protected override void OnParametersSet()
+ {
+ if (Id != 0)
+ {
+ Book = Repository.Books.FirstOrDefault(b => b.BookID == Id);
+ }
+ }
+ public void SaveBook()
+ {
+ if (Id == 0)
+ {
+ Repository.CreateBook(Book);
+ }
+ else
+ {
+ Repository.SaveBook(Book);
+ }
+ NavManager.NavigateTo("/admin/coffes");
+ }
+ public string ThemeColor => Id == 0 ? "primary" : "warning";
+ public string TitleText => Id == 0 ? "Create" : "Edit";
+}
