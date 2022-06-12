@@ -3,11 +3,7 @@ Trang chủ của trang web
 Hiển thị thông tin về những hạt Cafes nỗi tiếng
 ![image](https://user-images.githubusercontent.com/93509327/173245318-b11e7889-528c-48fd-bad0-10365ba30031.png)
 
-Các công nghệ sử dụng trong Project:
-
-Asp.net core MVC
-EF Core
-Bootstrap
+Các công nghệ sử dụng trong Project: Asp.net core MVC, EF Core, Bootstrap
 
 Khi click vào "Thêm vào giỏ": 
 ![image](https://user-images.githubusercontent.com/93509327/173245345-51f1f616-4eab-4d74-a4a2-67f813514937.png)
